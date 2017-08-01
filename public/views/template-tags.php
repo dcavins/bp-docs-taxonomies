@@ -106,6 +106,9 @@ function bpdt_get_term_link( $args = array() ) {
  * @return string html markup
  */
 function bpdt_terms_metaboxes( $doc_id ) {
+	// Make sure that wp_terms_checklist() will work.
+	require_once( ABSPATH . 'wp-admin/includes/template.php' );
+
 	$taxonomies = bpdt_get_selected_taxonomies();
 	foreach ( $taxonomies as $tax_name ) {
 		$taxonomy = get_taxonomy( $tax_name );
@@ -126,31 +129,15 @@ function bpdt_terms_metaboxes( $doc_id ) {
 
 							<td>
 								<?php
-								$terms = get_terms( array(
-								    'taxonomy'   => $tax_name,
-								    'hide_empty' => false,
-								) );
-								$selected_terms = get_the_terms( $doc_id, $tax_name );
-								if ( ! empty( $selected_terms ) ) {
-									$selected_terms = wp_list_pluck( $selected_terms, 'term_id' );
-								} else {
-									$selected_terms = array();
-								}
-
-								if ( ! empty( $terms ) ) :
-									?>
-									<ul class="no-bullets horizontal">
-										<?php
-											foreach ( $terms as $term ) {
-												$selected_term = in_array( $term->term_id, $selected_terms) ? true : false;
-											?>
-											<li id="category-<?php echo $term->term_id; ?>"><label class="selectit"><input value="<?php echo $term->term_id; ?>" type="checkbox" name="<?php echo $tax_name; ?>[]" id="in-<?php echo $tax_name . '-' . $category->term_id; ?>" <?php checked( $selected_term ); ?>> <?php echo $term->name; ?></label></li>
-											<?php
-										}
-										?>
-									</ul>
-									<?php
-								endif;
+								/**
+								 * Filters the arguments array passed to wp_terms_checklist().
+								 *
+								 * @since 1.0.0
+								 *
+								 * @param array $checklist_args Arguments for wp_terms_checklist().
+								 */
+								$checklist_args = apply_filters( 'bpdt_edit_metabox_terms_checklist_args', array( 'taxonomy' => $tax_name ) );
+								wp_terms_checklist( $doc_id, $checklist_args );
 								?>
 							</td>
 						</tr>

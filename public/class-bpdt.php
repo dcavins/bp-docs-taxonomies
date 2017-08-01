@@ -294,13 +294,22 @@ class BPDT_Public {
 	public function save_terms( $query ) {
 		$taxonomies = bpdt_get_selected_taxonomies();
 		foreach ( $taxonomies as $tax_name ) {
-			// Separate out the terms
-			$terms = ! empty( $_POST[$tax_name] ) ? array_map( 'absint', $_POST[$tax_name] ) : array();
-
-			if ( ! empty( $terms ) ) {
-				wp_set_post_terms( $query->doc_id, $terms, $tax_name );
+			/*
+			 * God knows why but wp_terms_checklist() outputs 'category' terms
+			 * as 'post_category'-named inputs.
+			 * And, wp_set_post_terms() doesn't recognize 'post_category'
+			 * as a taxonomy.
+			 */
+			if ( 'category' == $tax_name ) {
+				$terms = ! empty( $_POST['post_category'] ) ? array_map( 'absint', $_POST['post_category'] ) : array();
+			} else {
+				// And every other taxonomy is structured differently. Of course they are.
+				$terms = ! empty( $_POST['tax_input'][$tax_name] ) ? array_map( 'absint', $_POST['tax_input'][$tax_name] ) : array();
 			}
+
+			wp_set_post_terms( $query->doc_id, $terms, $tax_name );
 		}
+
 	}
 
 }
