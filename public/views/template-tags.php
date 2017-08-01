@@ -123,7 +123,10 @@ function bpdt_terms_metaboxes( $doc_id ) {
 
 							<td>
 								<?php
-								$terms = get_terms( $tax_name );
+								$terms = get_terms( array(
+								    'taxonomy'   => $tax_name,
+								    'hide_empty' => false,
+								) );
 								$selected_terms = get_the_terms( $doc_id, $tax_name );
 								if ( ! empty( $selected_terms ) ) {
 									$selected_terms = wp_list_pluck( $selected_terms, 'term_id' );
