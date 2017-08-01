@@ -19,7 +19,10 @@ function bpdt_add_archive_filter_markup() {
 	foreach ( $taxonomies as $tax_name ) {
 		$taxonomy = get_taxonomy( $tax_name );
 		$toggle_class = ( in_array( $taxonomy->name, $active_filters ) ) ? ' docs-filter-section-open' : '';
-		$terms = get_terms( $taxonomy->name, array( 'hide_empty' => true ) );
+		$terms = get_terms( array(
+			'taxonomy'   => $taxonomy->name,
+			'hide_empty' => true
+		) );
 		?>
 		<div id="docs-filter-section-<?php echo $taxonomy->name; ?>" class="docs-filter-section<?php echo $toggle_class; ?>">
 			<ul id="<?php echo $taxonomy->name; ?>-list" class="no-bullets horizontal category-links">
