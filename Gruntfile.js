@@ -46,8 +46,7 @@ module.exports = function(grunt) {
 				expand: true,
 				ext: '-rtl.css',
 				src: [
-					'public/css/public.css',
-					'admin/css/admin.css'
+					'public/css/public.css'
 				]
 			}
 		},
