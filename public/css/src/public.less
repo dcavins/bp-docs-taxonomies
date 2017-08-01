@@ -1,6 +1,68 @@
 /* This stylesheet is used to style the public-facing components of the plugin. */
 
 // Mimic some BuddyPress Docs styles.
+.docs-filter-section {
+	a.tags-spanning-button,
+	a.tags-spanning-button:visited {
+		display: inline;
+		line-height: 3em;
+		text-decoration: none;
+		background: #fff;
+		background-opacity: .5;
+		padding: 5px 10px;
+		border-radius: 3px;
+	}
+	.and-x-more {
+		white-space: nowrap;
+	}
+	ul.term-filter-links {
+		list-style-type: none;
+		margin-bottom: 0;
+		padding: 0;
+		column-count: 2;
+		column-gap: 10%;
 
-@media screen and (min-width:768px), print {
+		li {
+			margin-left: 0;
+
+			&.hidden-tag {
+				display: none;
+			}
+
+			&.tags-ellipses {
+				font-style: italic;
+			}
+		}
+	}
+}
+
+//Media query for most screens, unseen by IE 7 or 8
+@media screen and (min-width:4em) {
+	.docs-filter-section {
+		a.tags-spanning-button,
+		a.tags-spanning-button:visited {
+			display: block; // Let the button span the entire box
+			margin-bottom: 1em;
+			padding: 0;
+			text-align: center;
+		}
+	}
+}
+
+//Media query for larger screens, like tablet
+@media screen and (min-width:50em) {
+	.docs-filter-section {
+		ul.term-filter-links {
+			column-count: 4;
+			column-gap: 5%;
+		}
+	}
+}
+//Media query for larger screens, like desktop
+@media screen and (min-width:71em) {
+	.docs-filter-section {
+		ul.term-filter-links {
+			column-count: 5;
+		}
+	}
 }

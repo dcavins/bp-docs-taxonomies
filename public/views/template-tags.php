@@ -25,7 +25,7 @@ function bpdt_add_archive_filter_markup() {
 		) );
 		?>
 		<div id="docs-filter-section-<?php echo $taxonomy->name; ?>" class="docs-filter-section<?php echo $toggle_class; ?>">
-			<ul id="<?php echo $taxonomy->name; ?>-list" class="no-bullets horizontal category-links">
+			<ul id="<?php echo $taxonomy->name; ?>-list" class="term-filter-links">
 			<?php if ( ! empty( $terms ) ) : ?>
 				<?php foreach ( $terms as $term ) :
 				// var_dump( $term );
