@@ -1,6 +1,7 @@
 /* This stylesheet is used to style the public-facing components of the plugin. */
 
 // Mimic some BuddyPress Docs styles.
+// Archive/Docs Directory styling
 .docs-filter-section {
 	a.tags-spanning-button,
 	a.tags-spanning-button:visited {
@@ -32,6 +33,32 @@
 			&.tags-ellipses {
 				font-style: italic;
 			}
+		}
+	}
+}
+
+// Edit screen styles
+.doc-content {
+	.bpdt-term-select {
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+		li {
+			margin-left: 0
+		}
+		.children {
+			list-style-type: none;
+			padding: 0 0 0 1em;
+		}
+	}
+}
+
+// BP Legacy
+#buddypress {
+	.bpdt-term-select {
+		label {
+			font-weight: 400;
+			margin: 0;
 		}
 	}
 }

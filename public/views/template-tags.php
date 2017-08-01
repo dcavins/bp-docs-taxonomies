@@ -128,17 +128,19 @@ function bpdt_terms_metaboxes( $doc_id ) {
 							</td>
 
 							<td>
-								<?php
-								/**
-								 * Filters the arguments array passed to wp_terms_checklist().
-								 *
-								 * @since 1.0.0
-								 *
-								 * @param array $checklist_args Arguments for wp_terms_checklist().
-								 */
-								$checklist_args = apply_filters( 'bpdt_edit_metabox_terms_checklist_args', array( 'taxonomy' => $tax_name ) );
-								wp_terms_checklist( $doc_id, $checklist_args );
-								?>
+								<ul class="bpdt-term-select">
+									<?php
+									/**
+									 * Filters the arguments array passed to wp_terms_checklist().
+									 *
+									 * @since 1.0.0
+									 *
+									 * @param array $checklist_args Arguments for wp_terms_checklist().
+									 */
+									$checklist_args = apply_filters( 'bpdt_edit_metabox_terms_checklist_args', array( 'taxonomy' => $tax_name ) );
+									wp_terms_checklist( $doc_id, $checklist_args );
+									?>
+								</ul>
 							</td>
 						</tr>
 					</table>
