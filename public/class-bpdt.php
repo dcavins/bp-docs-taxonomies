@@ -146,7 +146,7 @@ class BPDT_Public {
 			if ( ! empty( $taxonomy ) ) {
 				$types[] = array(
 					'slug'      => $taxonomy->name,
-					'title'     => $taxonomy->label,
+					'title'     => $taxonomy->labels->singular_name,
 					'query_arg' => $taxonomy->query_var,
 				);
 			}
