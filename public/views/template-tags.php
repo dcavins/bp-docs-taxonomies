@@ -27,11 +27,9 @@ function bpdt_add_archive_filter_markup() {
 		<div id="docs-filter-section-<?php echo $taxonomy->name; ?>" class="docs-filter-section<?php echo $toggle_class; ?>">
 			<ul id="<?php echo $taxonomy->name; ?>-list" class="term-filter-links">
 			<?php if ( ! empty( $terms ) ) : ?>
-				<?php foreach ( $terms as $term ) :
-				// var_dump( $term );
-				?>
+				<?php foreach ( $terms as $term ) :	?>
 					<li>
-						<a href="<?php echo bpdt_get_term_link( array( 'query_var' => $taxonomy->query_var, 'term' => $term->slug, 'type' => 'url' ) ); ?>" title="<?php echo esc_html( $term->name ) ?>"><?php echo esc_html( $term->name ) ?></a>
+						<a href="<?php echo bpdt_get_term_link( array( 'query_var' => $taxonomy->query_var, 'term' => $term->slug, 'name' => $term->name, 'type' => 'url' ) ); ?>" title="<?php echo esc_html( $term->name ) ?>"><?php echo esc_html( $term->name ) ?></a>
 					</li>
 				<?php endforeach; ?>
 			<?php else: ?>
@@ -62,6 +60,7 @@ function bpdt_get_term_link( $args = array() ) {
 	$defaults = array(
 		'query_var' => false,
 		'term' 	    => false,
+		'name'      => false,
 		'type'    	=> 'html',
 	);
 
@@ -91,7 +90,7 @@ function bpdt_get_term_link( $args = array() ) {
 	if ( $type != 'html' )
 		return apply_filters( 'bp_docs_get_tag_link_url', $url, $term, $type );
 
-	$html = '<a href="' . $url . '" title="' . sprintf( __( 'Docs tagged %s', 'bp-docs-taxonomies' ), esc_attr( $term ) ) . '">' . esc_html( $term ) . '</a>';
+	$html = '<a href="' . $url . '" title="' . sprintf( __( 'Docs tagged %s', 'bp-docs-taxonomies' ), esc_attr( $term ) ) . '">' . esc_html( $name ) . '</a>';
 
 	return apply_filters( 'bp_docs_get_term_link', $html, $url, $term, $type );
 }
@@ -203,6 +202,7 @@ function bpdt_build_terms_list() {
 	    	$link_array[] = bpdt_get_term_link( array(
 				'query_var' => $taxonomy->query_var,
 				'term' 	    => $term->slug,
+				'name'      => $term->name,
 				'type'    	=> 'html',
 			) );
 	    }

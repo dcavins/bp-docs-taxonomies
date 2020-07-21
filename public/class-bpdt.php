@@ -228,6 +228,7 @@ class BPDT_Public {
 					$termtext[] = bpdt_get_term_link( array(
 						'query_var' => $taxonomy->query_var,
 						'term' => $term->slug,
+						'name' => $term->name,
 						'type' => 'html'
 					) );
 				}
