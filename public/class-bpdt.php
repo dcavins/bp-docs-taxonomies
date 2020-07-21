@@ -59,6 +59,9 @@ class BPDT_Public {
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles_scripts' ) );
 
 		// Apply the selected taxonomies to bp_docs
+		add_action( 'bp_docs_load', array( $this, 'load_plugin_textdomain' ), 12 );
+
+		// Apply the selected taxonomies to bp_docs
 		add_action( 'bp_docs_init', array( $this, 'apply_taxonomies_to_bp_docs' ) );
 
 		/* Changes to the BP Docs Archive *************************************/
@@ -98,6 +101,26 @@ class BPDT_Public {
 	 */
 	public function get_plugin_slug() {
 		return $this->plugin_slug;
+	}
+
+	/**
+	 * Loads the textdomain for the plugin.
+	 * Language files are used in this order of preference:
+	 *    - WP_LANG_DIR/plugins/bp-docs-taxonomies-LOCALE.mo
+	 *    - WP_PLUGIN_DIR/bp-docs-taxonomies/languages/bp-docs-taxonomies-LOCALE.mo
+	 *
+	 * @since 1.1.0
+	 */
+	public function load_plugin_textdomain() {
+		/*
+		 * As of WP 4.6, WP has, by this point in the load order, already
+		 * automatically added language files in this location:
+		 * wp-content/languages/plugins/bp-docs-taxonomies-es_ES.mo
+		 * load_plugin_textdomain() also looks for language files in that location,
+		 * then it falls back to translations in the plugin's /languages folder, like
+		 * wp-content/plugins/bp-docs-taxonomies/languages/bp-docs-taxonomies-es_ES.mo
+		 */
+		load_plugin_textdomain( 'bp-docs-taxonomies', false, bpdt_get_plugin_base_name() . '/languages' );
 	}
 
 	/**
