@@ -11,7 +11,7 @@
  * Plugin Name:       BP Docs Taxonomies
  * Plugin URI:        https://github.com/dcavins/bp-docs-taxonomies
  * Description:       Apply existing taxonomies to your BuddyPress Docs library.
- * Version:           1.0.0
+ * Version:           1.1.0
  * Author:            dcavins
  * Text Domain:       bp-docs-taxonomies
  * License:           GPL-2.0+
@@ -66,7 +66,7 @@ function bpdt_get_plugin_base_uri(){
  * @return Directory path to the root of the plugin.
  */
 function bpdt_get_plugin_base_name(){
-	return plugin_basename( __FILE__ );
+	return plugin_basename( dirname( __FILE__ ) );
 }
 
 /**
